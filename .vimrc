@@ -243,12 +243,14 @@ Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-commentary'
 Plugin 'farmergreg/vim-lastplace'
 Plugin 'lukaszb/vim-web-indent'
+Plugin 'skwp/vim-iterm-rspec'
 " Additional objects
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'kana/vim-textobj-user'
 " Color schemes
 Plugin 'morhetz/gruvbox'
+
 call vundle#end()
 "
 " Split join
