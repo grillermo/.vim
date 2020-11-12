@@ -244,6 +244,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'farmergreg/vim-lastplace'
 Plugin 'lukaszb/vim-web-indent'
 Plugin 'skwp/vim-iterm-rspec'
+Plugin 'dkprice/vim-easygrep'
 " Additional objects
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'michaeljsmith/vim-indent-object'
@@ -280,6 +281,7 @@ let g:ctrlp_working_path_mode = 0
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  set grepprg=ag\ --nogroup\ --nocolor
   
   " " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
