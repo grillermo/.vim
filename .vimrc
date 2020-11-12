@@ -486,6 +486,8 @@ imap <C-l> <right>
 imap <C-k> <up>
 imap <C-j> <down>
 imap <C-h> <left>
+" Copy current file to clipboard without losing position
+map <leader>ca :%y+<CR>
 
 " Spelling mistakes
 "
