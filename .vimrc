@@ -365,9 +365,13 @@ let g:unite_winheight = 20
 " Match fuzzy finder ctrlp like'
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 "
-" Undo tree
+" GUndo 
 "
-map <C-g> :UndotreeToggle<cr>
+if has('python3')
+    let g:gundo_prefer_python3 = 1
+endif
+map <leader>g :GundoToggle<cr>
+map <C-g> :GundoToggle<cr>
 "
 " Airline
 "
