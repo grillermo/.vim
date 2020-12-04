@@ -104,8 +104,8 @@ set magic
 "
 " Folds
 "
-" Fold with indents
-set foldmethod=indent
+" Fold with syntax for a smarter folding
+set foldmethod=syntax
 " everything folded at start
 set foldlevelstart=2
 "
