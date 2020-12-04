@@ -241,6 +241,7 @@ Plugin 'farmergreg/vim-lastplace'
 Plugin 'lukaszb/vim-web-indent'
 Plugin 'skwp/vim-iterm-rspec'
 Plugin 'dkprice/vim-easygrep'
+Plugin 'tpope/vim-unimpaired'
 " Additional objects
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'michaeljsmith/vim-indent-object'
