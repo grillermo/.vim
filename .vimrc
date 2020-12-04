@@ -406,7 +406,8 @@ endif
 colorscheme gruvbox
 
 
-" Defaults fixes and personal mappins
+
+" Defaults fixes and custom personal mappins
 
 " Do not force me to do "0p after overriding something with paste
 xnoremap p "_dP
@@ -437,6 +438,11 @@ vmap <S-Tab> <gv
 " Move between buffers using tabs
 map <C-Tab> :bnext<cr>
 map <C-S-Tab> :bcrevious<cr>
+" Move between buffers with home keys
+map ∆ <C-w>j 
+map ˚ <C-w>k 
+map ¬ <C-w>l 
+map ˙ <C-w>h
 " Move text around with ctrl and hjkl
 nmap <C-l> >>
 nmap <C-h> <<
