@@ -457,6 +457,7 @@ map <Esc>[Z <s-tab>
 ounmap <Esc>[Z
 "remap save
 map <D-s> :update!<cr>
+map <C-s> :update!<cr>
 "remap copy
 map <D-c> <c-c>
 map <D-v> <c-v>
