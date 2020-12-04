@@ -451,7 +451,7 @@ nmap <C-X> Ydd
 " Close the window and delete the buffer associated with it
 map <D-d> :bd!<cr>
 " Fix shift-v selecting all the line including the endofline
-nmap <S-v> g^vg$h
+nmap <S-v> g^v$
 " Mapping shift tab to <s-tab>
 map <Esc>[Z <s-tab>
 ounmap <Esc>[Z
