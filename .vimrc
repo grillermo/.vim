@@ -122,10 +122,6 @@ set undoreload=1000
 " Disable annoying ballons
 set noballooneval
 "
-" Sessions
-"
-set sessionoptions=blank,buffers,folds,resize,tabpages,winpos,winsize 
-"
 " Performace
 " 
 set nocursorline
