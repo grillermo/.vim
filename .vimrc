@@ -239,9 +239,10 @@ Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-commentary'
 Plugin 'farmergreg/vim-lastplace'
 Plugin 'lukaszb/vim-web-indent'
-Plugin 'skwp/vim-iterm-rspec'
+Plugin 'grillermo/vim-iterm-rspec'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'lilydjwg/colorizer'
 " Additional objects
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'michaeljsmith/vim-indent-object'
@@ -407,7 +408,7 @@ colorscheme gruvbox
 
 
 
-" Defaults fixes and custom personal mappins
+" Defaults fixes and custom personal mappins shortcuts and hotkeys
 
 " Do not force me to do "0p after overriding something with paste
 xnoremap p "_dP
@@ -492,7 +493,9 @@ imap <C-j> <down>
 imap <C-h> <left>
 " Copy current file to clipboard without losing position
 map <leader>ca :%y+<CR>
-
+"
+map <leader><F2> :ColorToggle<CR>
+"
 " Spelling mistakes
 "
 iab pry binding.pry
