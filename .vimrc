@@ -79,7 +79,7 @@ set guioptions-=T
 " hide tab names
 set showtabline=0
 " viminfo configuration
-set viminfo=!,%,'100,/5,:10,s500,n~/.vim/.viminfo
+set viminfo='1000,f1,\"500,:1000,%,n~/.viminfo
 " less verbose messages
 set shortmess=atIA
 " default the statusline to green when entering Vim
@@ -119,8 +119,6 @@ set undodir=~/.vim/undodir
 set undolevels=1000 
 "maximum number lines to save for undo on a buffer reload
 set undoreload=1000 
-" Disable annoying ballons
-set noballooneval
 "
 " Performace
 " 
@@ -132,6 +130,8 @@ set re=1
 set maxmempattern=2000000
 " Dark mode
 set bg=dark
+" Yank to clipboard
+set clipboard=unnamed
 
 " Autocommands
 
@@ -219,7 +219,6 @@ Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'sjl/gundo.vim'
-Plugin 'davidhalter/jedi-vim'
 Plugin 'preservim/nerdtree'
 Plugin 'xuyuanp/git-nerdtree'
 Plugin 'vim-syntastic/syntastic'
@@ -243,6 +242,8 @@ Plugin 'grillermo/vim-iterm-rspec'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'lilydjwg/colorizer'
+Plugin 'jreybert/vimagit'
+Plugin 'stefandtw/quickfix-reflector.vim'
 " Additional objects
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'michaeljsmith/vim-indent-object'
@@ -271,7 +272,7 @@ set tags+=gems.tags,./tags,tags
 "
 " Eslint
 let g:syntastic_javascript_checkers = ['eslint'] 
-let g:syntastic_python_checkers=['pyflakes']
+let g:syntastic_python_checkers=['flake8']
 "
 " CTRL P + ag silver searcher
 "
@@ -450,7 +451,7 @@ nmap <C-h> <<
 " Yank cut
 nmap <C-X> Ydd
 " Close the window and delete the buffer associated with it
-map <D-d> :bd!<cr>
+map <D-q> :bd!<cr>
 " Fix shift-v selecting all the line including the endofline
 nmap <S-v> g^v$
 " Mapping shift tab to <s-tab>
