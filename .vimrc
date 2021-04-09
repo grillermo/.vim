@@ -424,8 +424,6 @@ nnoremap <C-y> 3<C-y>
 " Quickfix movement
 nmap <leader>qn :cnext<cr>
 nmap <leader>qp :cprevious<cr>
-" Start a substitue for current work
-nmap <leader>sw y:%s/<C-r>"/<C-e>
 " browse through windows
 nmap <Tab> <C-w>w
 nmap <s-Tab> <C-w>W
