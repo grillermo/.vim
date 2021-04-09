@@ -304,6 +304,7 @@ let NERDTreeMinimalUI=1
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeWinSize=60
 "
 " Vim switch
 "
@@ -432,8 +433,6 @@ nmap <s-Tab> <C-w>W
 noremap <cr> o <Backspace><Esc>
 " Restore behavior in quickfix
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
-" Open Nerdtree"
-nmap <C-n> :NERDTreeToggle<CR>
 " Indent with tabs in visual mode"
 vmap <Tab> >gv
 vmap <S-Tab> <gv
@@ -502,8 +501,18 @@ map <leader><F2> :ColorToggle<CR>
 iab pry binding.pry
 
 
-
 " Functions
+
+function MyNerdToggle()
+    if &filetype == 'nerdtree'
+        :NERDTreeToggle
+    elseif bufname('%') == ''
+        :NERDTreeToggle
+    else
+        :NERDTreeFind
+    endif
+endfunction
+nnoremap <C-n> :call MyNerdToggle()<CR>
 
 " Copy current ruby file including requires into clipboard
 function! CopyCurrentRubyFile()
