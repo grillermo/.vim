@@ -506,7 +506,9 @@ function MyNerdToggle()
         :NERDTreeToggle
     elseif bufname('%') == ''
         :NERDTreeToggle
-    else
+      elseif exists("g:NERDTree") && g:NERDTree.IsOpen()
+        :NERDTreeToggle
+      else
         :NERDTreeFind
     endif
 endfunction
