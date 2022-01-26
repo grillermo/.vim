@@ -54,7 +54,6 @@ set showmatch "#
 set iskeyword+=_,$,@,%,# 
 " highlight current cursor position like a pro"
 set cursorcolumn 
-" Create an market in the column 100
 " give me one more character at the end of lines" 
 set ve=onemore 
 " you can change buffers without saving"
