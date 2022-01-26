@@ -245,6 +245,8 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'lilydjwg/colorizer'
 Plugin 'jreybert/vimagit'
 Plugin 'stefandtw/quickfix-reflector.vim'
+" Syntax highlighting
+Plugin 'figitaki/vim-dune'
 " Additional objects
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'michaeljsmith/vim-indent-object'
