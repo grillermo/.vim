@@ -248,9 +248,9 @@ Plugin 'stefandtw/quickfix-reflector.vim'
 " Syntax highlighting
 Plugin 'figitaki/vim-dune'
 " Additional objects
-Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'kana/vim-textobj-user'
+Plugin 'rhysd/vim-textobj-ruby'
 " Color schemes
 Plugin 'morhetz/gruvbox'
 
