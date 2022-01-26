@@ -498,6 +498,9 @@ map <leader><F2> :ColorToggle<CR>
 " Spelling mistakes
 "
 iab pry binding.pry
+" 
+" Close all tabs
+map <leader>bd :bufdo bdelete<CR>
 
 
 " Functions
