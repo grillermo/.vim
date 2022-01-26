@@ -244,7 +244,6 @@ Plugin 'dkprice/vim-easygrep'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'lilydjwg/colorizer'
 Plugin 'jreybert/vimagit'
-Plugin 'stefandtw/quickfix-reflector.vim'
 " Syntax highlighting
 Plugin 'figitaki/vim-dune'
 " Additional objects
