@@ -449,8 +449,6 @@ nmap <C-l> >>
 nmap <C-h> <<
 " Yank cut
 nmap <C-X> Ydd
-" Close the window and delete the buffer associated with it
-map <D-q> :bd!<cr>
 " Fix shift-v selecting all the line including the endofline
 nmap <S-v> g^v$
 " Mapping shift tab to <s-tab>
