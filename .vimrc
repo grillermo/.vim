@@ -86,7 +86,7 @@ hi statusline guibg=green
 " have a permanent statusline to color
 set laststatus=2
 " End of line column
-set cc=100
+set cc=119
 "
 " Search 
 "
