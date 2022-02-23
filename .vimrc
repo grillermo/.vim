@@ -521,7 +521,7 @@ nnoremap <C-n> :call MyNerdToggle()<CR>
 
 " Copy current ruby file including requires into clipboard
 function! CopyCurrentRubyFile()
-  !ruby /Users/grillermo/c/aliada/tandem-scripts/utils/copy_to_clipboard.rb %
+  !ruby /Users/grillermo/c/tandem/tandem-scripts/utils/copy_to_clipboard.rb %
 endfunction
 nnoremap <leader>cr :call CopyCurrentRubyFile()<CR> <CR>
 
