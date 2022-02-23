@@ -493,6 +493,8 @@ imap <C-h> <left>
 map <leader>ca :%y+<CR>
 "
 map <leader><F2> :ColorToggle<CR>
+" Some plugin is remapping Y to something else force it back
+map Y Y
 "
 " Spelling mistakes
 "
