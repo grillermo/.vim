@@ -278,10 +278,10 @@ let g:syntastic_python_checkers=['flake8']
 " CTRL P + ag silver searcher
 "
 let g:ctrlp_working_path_mode = 0
-if executable('ag')
+if executable('rg')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command ='rg %s --files --color=never --sort=path --glob "" | awk ''{print length($0), $0}'' | sort -n | cut -d '' '' -f2'
+  set grepprg=rg
   
   " " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
