@@ -290,7 +290,8 @@ set tags+=gems.tags,./tags,tags
 " Eslint
 let g:syntastic_javascript_checkers = ['eslint'] 
 let g:syntastic_python_checkers=['flake8']
-let g:syntastic_ruby_checkers=['rubocop', 'mri']
+" let g:syntastic_ruby_checkers=['rubocop', 'mri']
+let g:syntastic_ruby_checkers=['mri']
 "
 " CTRL P + ag silver searcher
 "
@@ -564,6 +565,12 @@ function! CopyCurrentRubyFile()
   !ruby /Users/grillermo/c/tandem/tandem-scripts/utils/copy_to_clipboard.rb %
 endfunction
 nnoremap <leader>cr :call CopyCurrentRubyFile()<CR> <CR>
+
+" Run rubocop with autofix
+function! FixWithRubocop()
+  ! rubocop -A %
+endfunction
+nnoremap <leader>rub :call FixWithRubocop()<CR> <CR>
 
 " Copy current working file paths
 if has("mac") || has("gui_macvim") || has("gui_mac")
