@@ -243,6 +243,7 @@ Plugin 'dkprice/vim-easygrep'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'lilydjwg/colorizer'
 Plugin 'jreybert/vimagit'
+Plugin 'itchyny/lightline.vim'
 " Syntax highlighting
 Plugin 'figitaki/vim-dune'
 " Additional objects
@@ -253,6 +254,19 @@ Plugin 'rhysd/vim-textobj-ruby'
 Plugin 'morhetz/gruvbox'
 
 call vundle#end()
+
+" Lightline
+"
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'absolutepath', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
 "
 " Split join
 "
