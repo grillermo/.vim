@@ -244,6 +244,8 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'lilydjwg/colorizer'
 Plugin 'jreybert/vimagit'
 Plugin 'itchyny/lightline.vim'
+Plugin 'jremmen/vim-ripgrep'
+Plugin 'mileszs/ack.vim'
 " Syntax highlighting
 Plugin 'figitaki/vim-dune'
 " Additional objects
@@ -342,7 +344,7 @@ nore <leader>h :!tidy -q -i -xml --force-output 1 --char-encoding utf8<CR>
 "
 let g:EasyGrepRecursive=1
 " bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR><CR>
+nnoremap K :Rg<CR>
 "
 " Vim Indent
 "
@@ -423,7 +425,31 @@ endif
 " Gruvbox
 "
 colorscheme gruvbox
-
+"
+" ack.vim --- {{{
+"
+" Use ripgrep for searching ⚡️
+" Options include:
+" --vimgrep -> Needed to parse the rg response properly for ack.vim
+" --type-not sql -> Avoid huge sql file dumps as it slows down the search
+" --smart-case -> Search case insensitive if all lowercase pattern, Search case sensitively otherwise
+let g:ackprg = 'rg --vimgrep --smart-case --sort=path'
+" Any empty ack search will search for the work the cursor is on
+let g:ack_use_cword_for_empty_search = 1
+" Don't jump to first match
+cnoreabbrev Ack Ack!
+"
+" QFEnter
+"
+let g:qfenter_keymap = {}
+let g:qfenter_keymap.vopen = ['<C-v>']
+let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
+let g:qfenter_keymap.topen = ['<C-t>']
+"
+"vim-ripgrep
+"
+" search command
+let g:rg_command='rg --vimgrep --smart-case --sort=path'
 
 
 " Defaults fixes and custom personal mappins shortcuts and hotkeys
@@ -497,7 +523,7 @@ nmap ,cl :let @*=expand("%:p")<CR>
 " Run ruby file
 nnoremap <leader>r :!ruby % <CR> 
 " When \ is pressed, Vim waits for our input:
-nnoremap \ :Ag! -Q<SPACE>
+nnoremap \ :Rg<SPACE>
 " Insert mode move, useful in quickfix and searches 
 imap <C-l> <right>
 imap <C-k> <up>
