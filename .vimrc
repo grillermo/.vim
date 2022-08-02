@@ -295,15 +295,22 @@ let g:syntastic_ruby_checkers=['mri']
 "
 " CTRL P + ag silver searcher
 "
-let g:ctrlp_working_path_mode = 0
 if executable('rg')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command ='rg %s --files --color=never --sort=path --glob "" | awk ''{print length($0), $0}'' | sort -n | cut -d '' '' -f2'
   set grepprg=rg
   
-  " " ag is fast enough that CtrlP doesn't need to cache
+  " " rg is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+" Configure the command CtrlP to search inside the current file directory
+let g:ctrlp_working_path_mode = 'c'
+" When doing ctrl+p ignore the previous config and use root file(our prefered
+" default)
+let g:ctrlp_cmd = 'CtrlPRoot'
+" Now cmd P searches in the current file directory (it requires iTerm key config)
+map <M-p> :CtrlP<CR>
+
 "
 " RSpec.vim 
 "
