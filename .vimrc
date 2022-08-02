@@ -550,7 +550,10 @@ iab pry binding.pry
 " 
 " Close all tabs
 map <leader>bd :bufdo bdelete<CR>
-
+"
+" Jump the cursor to the beginning of the line as in the CLI
+"
+cnoremap <C-A> <Home>
 
 " Functions
 
