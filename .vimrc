@@ -124,7 +124,7 @@ set undoreload=1000
 set nocursorline
 set norelativenumber
 " Old regex engine because rb syntax highliting is slow with new
-set re=1
+set re=0
 " Ensure vim does not spit an error on some ymls with base64 stuff
 set maxmempattern=2000000
 " Dark mode
