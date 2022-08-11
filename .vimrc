@@ -333,8 +333,8 @@ map <M-p> :CtrlP<CR>
 "
 " RSpec.vim 
 "
-map <Leader>rf :w<CR>:RunItermSpringSpec<CR>
-map <Leader>rc :w<CR>:RunItermSpringSpecLine<CR>
+map <Leader>rf :w<CR>:RunItermSpec <CR>
+map <Leader>rc :w<CR>:RunItermSpecLine<CR>
 let g:rspec_runner = "os_x_iterm"
 "
 " NERDTREE
