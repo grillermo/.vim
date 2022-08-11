@@ -177,6 +177,21 @@ autocmd BufNewFile,BufRead *.erb set ts=4 sw=4 et
 autocmd BufNewFile,BufRead *.erb set shiftwidth=4
 autocmd BufNewFile,BufRead *.erb set tabstop=4
 autocmd BufNewFile,BufRead *.erb set softtabstop=4
+" Indentation for js files
+autocmd BufNewFile,BufRead *.js set ts=2 sw=2 et
+autocmd BufNewFile,BufRead *.js set shiftwidth=2
+autocmd BufNewFile,BufRead *.js set tabstop=2
+autocmd BufNewFile,BufRead *.js set softtabstop=2
+
+autocmd BufNewFile,BufRead *.ts set ts=2 sw=2 et
+autocmd BufNewFile,BufRead *.ts set shiftwidth=2
+autocmd BufNewFile,BufRead *.ts set tabstop=2
+autocmd BufNewFile,BufRead *.ts set softtabstop=2
+
+autocmd BufNewFile,BufRead *.tsx set ts=2 sw=2 et
+autocmd BufNewFile,BufRead *.tsx set shiftwidth=2
+autocmd BufNewFile,BufRead *.tsx set tabstop=2
+autocmd BufNewFile,BufRead *.tsx set softtabstop=2
 " Create directory path when adding a new file if it does not exists
 if has("autocmd")
   autocmd BufWritePre * :silent! call mkdir(expand('%:p:h'), 'p')
