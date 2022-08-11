@@ -261,6 +261,10 @@ Plugin 'jreybert/vimagit'
 Plugin 'itchyny/lightline.vim'
 Plugin 'jremmen/vim-ripgrep'
 Plugin 'mileszs/ack.vim'
+" Javascript dev
+Plugin 'pangloss/vim-javascript'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/tsuquyomi'
 " Syntax highlighting
 Plugin 'figitaki/vim-dune'
 " Additional objects
