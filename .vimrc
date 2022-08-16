@@ -233,7 +233,7 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'sjl/gundo.vim'
+Plugin 'mbbill/undotree'
 Plugin 'preservim/nerdtree'
 Plugin 'xuyuanp/git-nerdtree'
 Plugin 'vim-syntastic/syntastic'
@@ -410,13 +410,9 @@ let g:unite_winheight = 20
 " Match fuzzy finder ctrlp like'
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 "
-" GUndo 
+" UndoTree (previously Gundo)
 "
-if has('python3')
-    let g:gundo_prefer_python3 = 1
-endif
-map <leader>g :GundoToggle<cr>
-map <C-g> :GundoToggle<cr>
+map <leader>g :UndotreeToggle<cr>
 "
 " Airline
 "
