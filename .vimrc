@@ -280,11 +280,21 @@ call vundle#end()
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'absolutepath', 'modified' ] ]
+      \   'left': [
+      \      [ 'mode', 'paste' ],
+      \      [ 'gitbranch', 'readonly', 'relativepath', 'modified' ]
+      \    ],
+      \   'right': [
+      \      [ 'filetype' ],
+      \      [ 'percent', 'line', 'column', 'encoding' ]
+      \    ],
       \ },
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ 'inactive': {
+      \   'left': [ [ 'absolutepath' ] ],
+      \   'right': [ [ ], ]
       \ },
       \ }
 "
