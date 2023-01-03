@@ -223,7 +223,6 @@ Plugin 'ntk148v/vim-horizon'
 Plugin 'othree/yajs.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'Quramy/vison'
-Plugin 'prettier/vim-prettier'
 Plugin 'ruanyl/vim-fixmyjs'
 Plugin 'AndrewRadev/switch.vim'
 Plugin 'neoclide/coc.nvim'
@@ -386,10 +385,6 @@ autocmd BufReadPre *.js let b:javascript_lib_use_underscore = 1
 " EASY align
 "
 vmap <leader><SPACE> <Plug>(EasyAlign)
-"
-" Prettier
-"
-vmap <leader>p :Prettier<CR>
 "
 " UNITE
 "
