@@ -339,6 +339,8 @@ let g:ctrlp_working_path_mode = 'c'
 let g:ctrlp_cmd = 'CtrlPRoot'
 " Now cmd P searches in the current file directory (it requires iTerm key config)
 map <M-p> :CtrlP<CR>
+" Go to first result of current word
+map <Leader>o :CtrlPRoot<CR><c-\>w
 
 "
 " RSpec.vim 
