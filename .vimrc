@@ -601,7 +601,7 @@ nnoremap <leader>rub :call FixWithRubocop()<CR> <CR>
 " Copy current working file paths
 if has("mac") || has("gui_macvim") || has("gui_mac")
   " relative path  (src/foo.txt)
-  nnoremap <leader>cf :let @*=expand("%")<CR>
+  nnoremap <leader>cr :let @*=expand("%")<CR>
 
   " absolute path  (/something/src/foo.txt)
   nnoremap <leader>cF :let @*=expand("%:p")<CR>
