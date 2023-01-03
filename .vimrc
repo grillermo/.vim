@@ -373,7 +373,7 @@ let g:switch_custom_definitions =
     \     }
     \   ]
 "
-" HTML Tidy
+" XML Tidy
 "
 " select xml text to format and hit ,x
 vmap <leader>h :!tidy -q -i -xml --force-output 1 --char-encoding utf8<CR>
