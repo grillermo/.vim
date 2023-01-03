@@ -422,14 +422,6 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 "
 map <leader>g :UndotreeToggle<cr>
 "
-" Airline
-"
-let g:airline_section_a = ''
-let g:airline_section_b = ''
-let g:airline_section_y = ''
-let g:airline_section_x = ''
-let g:airline_section_z = ''
-"
 " Coc
 "
 " Use tab for trigger completion with characters ahead and navigate.
