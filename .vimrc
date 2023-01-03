@@ -590,7 +590,7 @@ nnoremap <C-n> :call MyNerdToggle()<CR>
 function! CopyCurrentRubyFile()
   !ruby /Users/grillermo/c/tandem/tandem-scripts/utils/copy_to_clipboard.rb %
 endfunction
-nnoremap <leader>cr :call CopyCurrentRubyFile()<CR> <CR>
+nnoremap <leader>crub :call CopyCurrentRubyFile()<CR> <CR>
 
 " Run rubocop with autofix
 function! FixWithRubocop()
