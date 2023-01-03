@@ -320,6 +320,7 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_python_checkers=['flake8']
 " let g:syntastic_ruby_checkers=['rubocop', 'mri']
 let g:syntastic_ruby_checkers=['mri']
+map <Leader>js :!eslint --fix %<cr>
 "
 " CTRL P + ag silver searcher
 "
