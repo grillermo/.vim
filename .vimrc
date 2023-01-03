@@ -561,7 +561,8 @@ map Y Y
 "
 " Spelling mistakes
 "
-iab pry binding.pry
+iab pry require 'pry'; binding.pry 
+
 " 
 " Close all tabs
 map <leader>bd :bufdo bdelete<CR>
