@@ -541,8 +541,6 @@ inoremap <Down> <C-o>gj
 inoremap <Up> <C-o>gk
 " Do not jump immediatly with *
 nmap <silent> * "syiw<Esc>: let @/ = @s<CR>
-nmap ,cs :let @*=expand("%")<CR>
-nmap ,cl :let @*=expand("%:p")<CR>
 " Run ruby file
 nnoremap <leader>r :!ruby % <CR> 
 " When \ is pressed, Vim waits for our input:
@@ -604,7 +602,7 @@ if has("mac") || has("gui_macvim") || has("gui_mac")
   nnoremap <leader>cr :let @*=expand("%")<CR>
 
   " absolute path  (/something/src/foo.txt)
-  nnoremap <leader>cF :let @*=expand("%:p")<CR>
+  nnoremap <leader>cl :let @*=expand("%:p")<CR>
 endif
 
 " Mass indentation config
