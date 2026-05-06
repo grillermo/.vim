@@ -298,7 +298,8 @@ let g:lightline = {
       \ 'active': {
       \   'left': [
       \      [ 'mode', 'paste' ],
-      \      [ 'gitbranch', 'readonly', 'relativepath', 'modified' ]
+      \      [ 'gitbranch', 'readonly', 'relativepath', 'modified' ],
+      \      [ 'lsp_status' ]
       \    ],
       \   'right': [
       \      [ 'filetype' ],
@@ -306,7 +307,8 @@ let g:lightline = {
       \    ],
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
+      \   'gitbranch': 'FugitiveHead',
+      \   'lsp_status': 'LspStatus'
       \ },
       \ 'inactive': {
       \   'left': [ [ 'absolutepath' ] ],
@@ -450,6 +452,12 @@ endif
 " Gruvbox
 "
 colorscheme gruvbox
+" LSP status for lightline
+function! LspStatus() abort
+  return luaeval('#vim.lsp.get_clients({bufnr = 0}) > 0')
+        \ ? 'LSP:' . luaeval('vim.lsp.get_clients({bufnr = 0})[1].name')
+        \ : ''
+endfunction
 "
 " ack.vim --- {{{
 "
