@@ -231,7 +231,13 @@ Plugin 'Shougo/unite.vim'
 Plugin 'Quramy/vison'
 Plugin 'ruanyl/vim-fixmyjs'
 Plugin 'AndrewRadev/switch.vim'
-Plugin 'neoclide/coc.nvim'
+Plugin 'neovim/nvim-lspconfig'
+Plugin 'hrsh7th/nvim-cmp'
+Plugin 'hrsh7th/cmp-nvim-lsp'
+Plugin 'hrsh7th/cmp-buffer'
+Plugin 'hrsh7th/cmp-path'
+Plugin 'L3MON4D3/LuaSnip'
+Plugin 'saadparwaiz1/cmp_luasnip'
 Plugin 'inkarkat/vim-DeleteTrailingWhitespace'
 Plugin 'yssl/QFEnter'
 Plugin 'tmhedberg/SimpylFold'
@@ -279,6 +285,9 @@ Plugin 'kana/vim-textobj-user'
 Plugin 'rhysd/vim-textobj-ruby'
 " Color schemes
 Plugin 'morhetz/gruvbox'
+" Pandoc
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
 
 call vundle#end()
 
@@ -429,23 +438,8 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 "
 map <leader>g :UndotreeToggle<cr>
 "
-" Coc
+" Completion (configured in lua/completion.lua)
 "
-" inoremap <silent><expr> <TAB>
-"       \ coc#pum#visible() ? coc#pum#next(1) :
-"       \ CheckBackspace() ? "\<Tab>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-" " Make <CR> to accept selected completion item or notify coc.nvim to format
-" " <C-g>u breaks current undo, please make your own choice
-" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" function! CheckBackspace() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction" 
 " Copy YAML paths
 "
 if has("mac") || has("gui_macvim") || has("gui_mac")
