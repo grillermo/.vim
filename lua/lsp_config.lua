@@ -1,10 +1,10 @@
--- Find the path to your rbenv ruby-lsp binary
--- You can verify this path by running `which ruby-lsp` in your terminal
-local ruby_lsp_binary = "/Users/grillermo/.rbenv/shims/ruby-lsp"
+-- LSP capabilities from nvim-cmp
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+-- Ruby (ruby-lsp via rbenv)
 vim.lsp.config('ruby_lsp', {
-  -- Use the direct shim path instead of "bundle exec"
-  cmd = { ruby_lsp_binary },
+  cmd = { os.getenv("HOME") .. "/.rbenv/shims/ruby-lsp" },
+  capabilities = capabilities,
   init_options = {
     enabledFeatures = {
       "completion",
@@ -12,34 +12,38 @@ vim.lsp.config('ruby_lsp', {
       "hover",
       "diagnostics",
       "documentSymbols",
+      "formatting",
+      "codeActions",
     },
-    enabledAddons = {
-      "ruby-lsp-rails",
-      "ruby-lsp-rspec"
-    },
-    featuresConfiguration = {
-      inlayHint = {
-        enable = true
-      }
-    },
-    -- This tells ruby-lsp to use its own isolated bundle for add-ons
-    -- rather than your project's Gemfile
-    -- bundleGemfile = os.getenv("HOME") .. "/.config/ruby-lsp/Gemfile"
   },
 })
 
-vim.lsp.enable('ruby_lsp')
+-- Python (pyright)
+vim.lsp.config('pyright', {
+  cmd = { 'pyright-langserver', '--stdio' },
+  capabilities = capabilities,
+})
 
--- Use Tab to navigate the completion menu
-vim.keymap.set('i', '<Tab>', function()
-  return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
-end, { expr = true })
+-- TypeScript / JavaScript
+vim.lsp.config('ts_ls', {
+  cmd = { 'typescript-language-server', '--stdio' },
+  capabilities = capabilities,
+})
 
--- Use Shift-Tab to go backwards
-vim.keymap.set('i', '<S-Tab>', function()
-  return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
-end, { expr = true })
+vim.lsp.enable({ 'ruby_lsp', 'pyright', 'ts_ls' })
 
-vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Show RSpec Documentation" })
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Jump to Matcher/Shared Example" })
-vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "RSpec Refactor/Fixes" })
+-- Keymaps (activate when LSP attaches)
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local opts = { buffer = args.buf }
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+    -- Refresh lightline to show LSP status
+    vim.cmd('call lightline#update()')
+  end,
+})
