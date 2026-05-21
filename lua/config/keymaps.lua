@@ -51,6 +51,7 @@ keymap('n', '<leader>o', telescope_find_files, silent_noremap) -- Backup mapping
 keymap('n', '<leader>m', telescope_oldfiles, silent_noremap) -- MRU
 keymap('n', '<leader>l', telescope_current_buffer, silent_noremap)
 keymap('n', '\\', telescope_grep_string, silent_noremap) -- grep word under cursor
+keymap('n', 'K', telescope_grep_string, silent_noremap) -- grep word under cursor
 
 -- neo-tree file browser
 keymap('n', '<C-n>', ':Neotree toggle<CR>', silent_noremap)
