@@ -48,7 +48,7 @@ end
 
 keymap('n', '<C-p>', telescope_find_files, silent_noremap)
 keymap('n', '<leader>o', telescope_find_files, silent_noremap) -- Backup mapping
-keymap('n', '<leader>r', telescope_oldfiles, silent_noremap) -- MRU
+keymap('n', '<leader>m', telescope_oldfiles, silent_noremap) -- MRU
 keymap('n', '<leader>l', telescope_current_buffer, silent_noremap)
 keymap('n', '\\', telescope_grep_string, silent_noremap) -- grep word under cursor
 
@@ -62,9 +62,6 @@ keymap('n', '<leader>g', ':UndotreeToggle<CR>', silent_noremap)
 if vim.fn.has('mac') == 1 or vim.fn.has('gui_macvim') == 1 then
   keymap('n', '<leader>cy', ':YamlGetFullPath<CR>', silent_noremap)
 end
-
--- Color toggle
-keymap('n', '<leader><F2>', ':ColorToggle<CR>', silent_noremap)
 
 -- Force Y to yank (some plugins override)
 keymap('n', 'Y', 'Y', noremap)
@@ -178,9 +175,6 @@ keymap('n', '<leader>i2', function()
   vim.opt.tabstop = 2
   vim.opt.softtabstop = 2
 end, silent_noremap)
-
--- Copy all to clipboard (renamed from <leader>ca to <leader>ya to avoid LSP conflict)
-keymap('n', '<leader>ya', ':%y+<CR>', silent_noremap)
 
 -- Rubocop
 keymap('n', '<leader>rub', function()
