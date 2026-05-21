@@ -14,6 +14,7 @@ return {
             i = {
               ['<C-c>'] = actions.close,
               ['<Esc>'] = actions.close,
+              ['<C-s>'] = actions.select_horizontal,
             },
           },
           file_ignore_patterns = { 'node_modules', '.git', '.ruby-lsp' },
