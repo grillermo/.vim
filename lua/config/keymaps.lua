@@ -53,8 +53,10 @@ keymap('n', '<leader>l', telescope_current_buffer, silent_noremap)
 keymap('n', '\\', telescope_grep_string, silent_noremap) -- grep word under cursor
 keymap('n', 'K', telescope_grep_string, silent_noremap) -- grep word under cursor
 
--- neo-tree file browser
-keymap('n', '<C-n>', ':Neotree toggle<CR>', silent_noremap)
+-- snacks file browser
+keymap('n', '<C-n>', function()
+  Snacks.explorer()
+end, silent_noremap)
 
 -- Undo tree
 keymap('n', '<leader>g', ':UndotreeToggle<CR>', silent_noremap)

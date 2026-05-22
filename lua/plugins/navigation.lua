@@ -1,4 +1,98 @@
 return {
+  -- File explorer (snacks)
+  {
+    'folke/snacks.nvim',
+    priority = 1000,
+    lazy = false,
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+    opts = function()
+      local function nerdtree_root(picker, item)
+        if not item then
+          return
+        end
+        local root = item.dir and item.file or vim.fs.dirname(item.file)
+        picker:set_cwd(root)
+        picker:find()
+      end
+
+      local function nerdtree_menu(picker)
+        local actions = {
+          { label = 'Add', action = 'explorer_add' },
+          { label = 'Delete', action = 'explorer_del' },
+          { label = 'Rename', action = 'explorer_rename' },
+          { label = 'Copy', action = 'explorer_copy' },
+          { label = 'Move', action = 'explorer_move' },
+          { label = 'Yank', action = 'explorer_yank' },
+          { label = 'Paste', action = 'explorer_paste' },
+          { label = 'Open Externally', action = 'explorer_open' },
+          { label = 'Refresh', action = 'explorer_update' },
+        }
+
+        vim.ui.select(actions, {
+          prompt = 'Explorer action',
+          format_item = function(choice)
+            return choice.label
+          end,
+        }, function(choice)
+          if choice then
+            picker:action(choice.action)
+          end
+        end)
+      end
+
+      return {
+        explorer = {
+          enabled = true,
+          replace_netrw = true,
+        },
+        picker = {
+          enabled = true,
+          sources = {
+            explorer = {
+              cmd = 'rg',
+              follow_file = false,
+              hidden = true,
+              ignored = false,
+              layout = {
+                preset = 'sidebar',
+                preview = false,
+              },
+              actions = {
+                nerdtree_root = nerdtree_root,
+                nerdtree_menu = nerdtree_menu,
+              },
+              win = {
+                list = {
+                  keys = {
+                    ['<CR>'] = 'confirm',
+                    ['o'] = 'confirm',
+                    ['l'] = 'confirm',
+                    ['h'] = 'explorer_close',
+                    ['x'] = 'explorer_close',
+                    ['X'] = 'explorer_close_all',
+                    ['u'] = 'explorer_up',
+                    ['<BS>'] = 'explorer_up',
+                    ['i'] = 'edit_split',
+                    ['s'] = 'edit_vsplit',
+                    ['t'] = 'tab',
+                    ['r'] = 'explorer_update',
+                    ['R'] = 'explorer_update',
+                    ['m'] = 'nerdtree_menu',
+                    ['C'] = 'nerdtree_root',
+                    ['I'] = 'toggle_hidden',
+                    ['q'] = 'cancel',
+                  },
+                },
+              },
+            },
+          },
+        },
+      }
+    end,
+  },
+
   -- Fuzzy finder
   {
     'nvim-telescope/telescope.nvim',
@@ -44,135 +138,6 @@ return {
       }
 
       telescope.load_extension('fzf')
-    end,
-  },
-
-  -- File explorer (neo-tree)
-  {
-    'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v3.x',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons',
-      'MunifTanjim/nui.nvim',
-    },
-    config = function()
-      require('neo-tree').setup {
-        close_if_last_window = false,
-        popup_border_style = 'solid',
-        enable_git_status = true,
-        enable_diagnostics = true,
-        default_component_configs = {
-          indent = {
-            indent_size = 2,
-            padding = 1,
-            with_markers = true,
-            indent_marker = '│',
-            last_indent_marker = '└',
-            highlight = 'NeoTreeIndentMarker',
-            with_expanders = nil,
-            expander_collapsed = '',
-            expander_expanded = '',
-            expander_highlight = 'NeoTreeExpander',
-          },
-          icon = {
-            folder_closed = '▸',
-            folder_open = '▾',
-            folder_empty = '○',
-            default = '',
-          },
-          modified = {
-            symbol = '[+]',
-            highlight = 'NeoTreeModified',
-          },
-          name = {
-            trailing_slash = false,
-            use_git_status_colors = true,
-            highlight = 'NeoTreeFileName',
-          },
-          git_status = {
-            symbols = {
-              added = '✓',
-              deleted = '✕',
-              modified = '●',
-              renamed = '»',
-              untracked = '?',
-              ignored = '◌',
-              unstaged = '◌',
-              staged = '✓',
-              conflict = '!',
-            },
-          },
-        },
-        window = {
-          position = 'left',
-          width = 60,
-          mapping_options = {
-            noremap = true,
-            nowait = true,
-          },
-          mappings = {
-            ['<space>'] = 'toggle_node',
-            ['<2-LeftMouse>'] = 'open',
-            ['<cr>'] = 'open',
-            ['S'] = 'open_split',
-            ['s'] = 'open_vsplit',
-            ['C'] = 'close_node',
-            ['z'] = 'close_all_nodes',
-            ['a'] = { 'add', config = { show_path = 'none' } },
-            ['A'] = { 'add_directory', config = { show_path = 'none' } },
-            ['d'] = 'delete',
-            ['r'] = 'rename',
-            ['y'] = 'copy_to_clipboard',
-            ['x'] = 'cut_to_clipboard',
-            ['p'] = 'paste_from_clipboard',
-            ['c'] = 'copy',
-            ['m'] = 'move',
-            ['q'] = 'close_window',
-            ['R'] = 'refresh',
-            ['?'] = 'show_help',
-            ['<'] = 'prev_source',
-            ['>'] = 'next_source',
-            ['i'] = 'show_file_details',
-          },
-        },
-        nesting_rules = {},
-        filesystem = {
-          filtered_items = {
-            visible = false,
-            hide_dotfiles = false,
-            hide_gitignored = true,
-          },
-          follow_current_file = {
-            enabled = false,
-          },
-          group_empty_dirs = false,
-          use_libuv_file_watcher = false,
-        },
-        buffers = {
-          follow_current_file = {
-            enabled = true,
-            leave_dirs_open = false,
-          },
-        },
-        git_status = {
-          window = {
-            position = 'float',
-          },
-        },
-        document_symbols = {
-          follow_cursor = false,
-          client_filters = 'scopes',
-          renderers = {
-            document_symbols = {
-              filter_kind = {
-                default = nil,
-                exclude = {},
-              },
-            },
-          },
-        },
-      }
     end,
   },
 
