@@ -17,6 +17,24 @@ return {
         picker:find()
       end
 
+      local function nerdtree_confirm(picker, item, action)
+        if not item then
+          return
+        end
+        if item.dir then
+          if picker.input.filter.meta.searching then
+            picker.input:set('', '')
+            picker:set_cwd(item.file)
+            picker:find()
+          else
+            require('snacks.explorer.tree'):toggle(item.file)
+            picker:find()
+          end
+          return
+        end
+        Snacks.picker.actions.jump(picker, item, action)
+      end
+
       local function nerdtree_menu(picker)
         local actions = {
           { label = 'Add', action = 'explorer_add' },
@@ -55,11 +73,15 @@ return {
               follow_file = false,
               hidden = true,
               ignored = false,
+              sort = {
+                fields = { 'score:desc', 'dir', '#file', '#text', 'idx' },
+              },
               layout = {
                 preset = 'sidebar',
                 preview = false,
               },
               actions = {
+                confirm = nerdtree_confirm,
                 nerdtree_root = nerdtree_root,
                 nerdtree_menu = nerdtree_menu,
               },
