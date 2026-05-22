@@ -17,7 +17,13 @@ return {
             i = {
               ['<C-c>'] = actions.close,
               ['<Esc>'] = actions.close,
+              ['<C-j>'] = actions.move_selection_next,
+              ['<C-k>'] = actions.move_selection_previous,
               ['<C-s>'] = actions.select_horizontal,
+            },
+            n = {
+              ['<C-j>'] = actions.move_selection_next,
+              ['<C-k>'] = actions.move_selection_previous,
             },
           },
           file_ignore_patterns = { 'node_modules', '.git', '.ruby-lsp' },
