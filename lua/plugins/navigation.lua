@@ -148,6 +148,12 @@ return {
           find_files = {
             hidden = true,
           },
+          live_grep = {
+            sorter = require('telescope.sorters').get_substr_matcher({}),
+          },
+          grep_string = {
+            sorter = require('telescope.sorters').get_substr_matcher({}),
+          },
         },
         extensions = {
           fzf = {

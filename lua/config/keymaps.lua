@@ -42,6 +42,13 @@ end
 local function telescope_grep_string()
   require('telescope.builtin').grep_string()
 end
+local function telescope_live_grep_root()
+  local root = vim.fn.systemlist('git rev-parse --show-toplevel 2>/dev/null')[1]
+  if not root or root == '' then
+    root = vim.fn.getcwd()
+  end
+  require('telescope.builtin').live_grep({ cwd = root })
+end
 local function telescope_current_buffer()
   require('telescope.builtin').current_buffer_fuzzy_find()
 end
@@ -50,7 +57,7 @@ keymap('n', '<C-p>', telescope_find_files, silent_noremap)
 keymap('n', '<leader>o', telescope_find_files, silent_noremap) -- Backup mapping
 keymap('n', '<leader>m', telescope_oldfiles, silent_noremap) -- MRU
 keymap('n', '<leader>l', telescope_current_buffer, silent_noremap)
-keymap('n', '\\', telescope_grep_string, silent_noremap) -- grep word under cursor
+keymap('n', '\\', telescope_live_grep_root, silent_noremap) -- live grep from project root
 keymap('n', 'K', telescope_grep_string, silent_noremap) -- grep word under cursor
 
 -- snacks file browser
