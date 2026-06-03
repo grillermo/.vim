@@ -86,9 +86,15 @@ return {
                 nerdtree_menu = nerdtree_menu,
               },
               win = {
+                input = {
+                  keys = {
+                    ['<C-n>'] = 'cancel',
+                  },
+                },
                 list = {
                   keys = {
                     ['<CR>'] = 'confirm',
+                    ['<C-n>'] = 'cancel',
                     ['o'] = 'confirm',
                     ['l'] = 'confirm',
                     ['h'] = 'explorer_close',
