@@ -72,7 +72,7 @@ return {
               cmd = 'rg',
               follow_file = false,
               hidden = true,
-              ignored = false,
+              ignored = true,
               sort = {
                 fields = { 'score:desc', 'dir', '#file', '#text', 'idx' },
               },
@@ -95,6 +95,19 @@ return {
                   keys = {
                     ['<CR>'] = 'confirm',
                     ['<C-n>'] = 'cancel',
+                    ['<Space>'] = 'select_and_next',
+                    ['<S-Space>'] = 'select_and_prev',
+                    ['<Tab>'] = {
+                      function()
+                        vim.api.nvim_feedkeys(
+                          vim.api.nvim_replace_termcodes('<C-w>l', true, false, true),
+                          'n',
+                          false
+                        )
+                      end,
+                      mode = { 'n', 'i' },
+                    },
+                    ['<S-Tab>'] = false,
                     ['o'] = 'confirm',
                     ['l'] = 'confirm',
                     ['h'] = 'explorer_close',
