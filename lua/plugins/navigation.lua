@@ -119,7 +119,9 @@ return {
                     ['s'] = 'edit_vsplit',
                     ['t'] = 'tab',
                     ['r'] = 'explorer_update',
-                    ['R'] = 'explorer_update',
+                    ['R'] = function(picker)
+                      require('snacks.explorer.actions').update(picker, { refresh = true })
+                    end,
                     ['m'] = 'nerdtree_menu',
                     ['C'] = 'nerdtree_root',
                     ['I'] = 'toggle_hidden',

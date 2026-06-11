@@ -30,6 +30,15 @@ autocmd('BufWritePre', {
   end,
 })
 
+-- Format Ruby files with RuboCop when the project root opts in
+autocmd('BufWritePost', {
+  group = augroup('RubyFormat', { clear = true }),
+  pattern = { '*.rb', '*.ruby', '*.rake', 'Gemfile', 'Rakefile' },
+  callback = function(args)
+    require('config.ruby_format').format_buffer(args.buf)
+  end,
+})
+
 -- Filetype-specific indentation
 local function set_indent(ft, size)
   autocmd('BufNewFile', {
