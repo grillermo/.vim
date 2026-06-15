@@ -70,8 +70,13 @@ return {
   -- Text object user (dependency for custom text objects)
   'kana/vim-textobj-user',
 
-  -- Built-in % matching (e.g., % to jump between matching brackets)
-  'tmhedberg/matchit',
+  -- % matching for brackets, HTML tags, language keywords
+  {
+    'andymass/vim-matchup',
+    config = function()
+      vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+    end,
+  },
 
   -- Enhanced file operations (e.g., :Rename, :Delete, :Chmod)
   'tpope/vim-eunuch',
