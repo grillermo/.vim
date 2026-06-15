@@ -135,6 +135,7 @@ From [`lua/config/keymaps.lua`](./lua/config/keymaps.lua):
 
 - Files/search:
   - `<C-p>` or `<leader>o`: find files (Telescope)
+  - `<C-S-p>`: find files, including `.gitignore`-ignored files (Telescope)
   - `<leader>m`: recent files
   - `<leader>l`: fuzzy find in current buffer
   - `K` and `\\`: grep word under cursor (Telescope)

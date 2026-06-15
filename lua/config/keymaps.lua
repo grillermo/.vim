@@ -33,6 +33,9 @@ keymap('n', '<leader>h', ':!tidy -q -i -xml --force-output 1 --char-encoding utf
 local function telescope_find_files()
   require('telescope.builtin').find_files()
 end
+local function telescope_find_files_no_ignore()
+  require('telescope.builtin').find_files({ no_ignore = true })
+end
 local function telescope_oldfiles()
   require('telescope.builtin').oldfiles()
 end
@@ -54,6 +57,7 @@ local function telescope_current_buffer()
 end
 
 keymap('n', '<C-p>', telescope_find_files, silent_noremap)
+keymap('n', '<C-S-p>', telescope_find_files_no_ignore, silent_noremap)
 keymap('n', '<leader>o', telescope_find_files, silent_noremap) -- Backup mapping
 keymap('n', '<leader>m', telescope_oldfiles, silent_noremap) -- MRU
 keymap('n', '<leader>l', telescope_current_buffer, silent_noremap)
