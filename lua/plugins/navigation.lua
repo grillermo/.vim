@@ -148,8 +148,61 @@ return {
       local telescope = require('telescope')
       local actions = require('telescope.actions')
 
+      local function case_insensitive_substr_matcher()
+        local sorters = require('telescope.sorters')
+        local utils = require('telescope.utils')
+
+        local function search_terms(prompt)
+          return utils.max_split(prompt:lower(), '%s')
+        end
+
+        return sorters.Sorter:new {
+          highlighter = function(_, prompt, display)
+            local highlights = {}
+            local lower_display = display:lower()
+
+            for _, word in pairs(search_terms(prompt)) do
+              local hl_start, hl_end = lower_display:find(word, 1, true)
+              if hl_start then
+                table.insert(highlights, { start = hl_start, finish = hl_end })
+              end
+            end
+
+            return highlights
+          end,
+
+          scoring_function = function(_, prompt, _, entry)
+            if #prompt == 0 then
+              return 1
+            end
+
+            local display = entry.ordinal:lower()
+            local matched = 0
+            local total_search_terms = 0
+
+            for _, word in pairs(search_terms(prompt)) do
+              total_search_terms = total_search_terms + 1
+              if display:find(word, 1, true) then
+                matched = matched + 1
+              end
+            end
+
+            return matched == total_search_terms and (entry.index or 1) or -1
+          end,
+        }
+      end
+
       telescope.setup {
         defaults = {
+          vimgrep_arguments = {
+            'rg',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--ignore-case',
+          },
           mappings = {
             i = {
               ['<C-c>'] = actions.close,
@@ -170,10 +223,10 @@ return {
             hidden = true,
           },
           live_grep = {
-            sorter = require('telescope.sorters').get_substr_matcher({}),
+            sorter = case_insensitive_substr_matcher(),
           },
           grep_string = {
-            sorter = require('telescope.sorters').get_substr_matcher({}),
+            sorter = case_insensitive_substr_matcher(),
           },
         },
         extensions = {
