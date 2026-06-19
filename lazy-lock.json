@@ -44,7 +44,7 @@
   "vim-indent-guides": { "branch": "master", "commit": "a1e1390c0136e63e813d051de2003bf0ee18ae30" },
   "vim-indent-object": { "branch": "master", "commit": "8ab36d5ec2a3a60468437a95e142ce994df598c6" },
   "vim-ingo-library": { "branch": "master", "commit": "700aec39d26beaf1173ce3a52df62486d60d7fdb" },
-  "vim-iterm-rspec": { "branch": "master", "commit": "d18c4ddcb710b43cf4ce53a7c04e6ddd51f4da65" },
+  "vim-iterm-rspec": { "branch": "master", "commit": "91fba798e271a0db318ce76bd1556a5ded4788e4" },
   "vim-javascript": { "branch": "master", "commit": "b26c9edb3563e02f5c0b20580f7cf9743e95b157" },
   "vim-jsbeautify": { "branch": "master", "commit": "e4586884c8e54218a92d66f2ebc3fefc46315057" },
   "vim-jsx": { "branch": "master", "commit": "8879e0d9c5ba0e04ecbede1c89f63b7a0efa24af" },
