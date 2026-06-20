@@ -200,13 +200,9 @@ keymap('n', '<leader>crub', function()
   vim.cmd('!ruby /Users/grillermo/c/tandem/tandem-scripts/utils/copy_to_clipboard.rb %')
 end, silent_noremap)
 
--- Save shortcuts (macOS)
+-- Cmd+C in normal mode (macOS GUI) -- D-s/D-v/visual D-c handled by neovide block below
 if vim.fn.has('gui_running') == 1 then
-  keymap('n', '<D-s>', ':update!<CR>', silent_noremap)
   keymap('n', '<D-c>', '<C-c>', noremap)
-  keymap('n', '<D-v>', '<C-v>', noremap)
-  keymap('i', '<D-v>', '<C-v>', noremap)
-  keymap('v', '<D-c>', '"+y<CR>', noremap)
 end
 
 -- Windows/other systems save
@@ -242,3 +238,19 @@ end
 
 keymap('n', '<C-k>', move_line_up, silent_noremap)
 keymap('n', '<C-j>', move_line_down, silent_noremap)
+
+-- Neovide clipboard/save mappings
+if vim.g.neovide then
+  vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
+  vim.keymap.set('v', '<D-c>', '"+y') -- Copy
+  vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
+  vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
+  vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
+  vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+end
+
+-- Allow clipboard copy paste in neovim
+vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
