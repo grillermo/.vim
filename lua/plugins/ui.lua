@@ -3,12 +3,27 @@ return {
   {
     'itchyny/lightline.vim',
     config = function()
+      vim.cmd([[
+        function! LightlineProjectRoot()
+          return fnamemodify(getcwd(), ':t')
+        endfunction
+
+        function! LightlinePromptSeparator()
+          return FugitiveHead() ==# '' ? '' : '⮀'
+        endfunction
+      ]])
+
       vim.g.lightline = {
-        colorscheme = 'wombat',
+        colorscheme = 'prompt',
+        separator = { left = '', right = '' },
+        subseparator = { left = '', right = '' },
         active = {
           left = {
+            { 'project_root' },
+            { 'prompt_separator' },
+            { 'gitbranch' },
             { 'mode', 'paste' },
-            { 'gitbranch', 'readonly', 'relativepath', 'modified' },
+            { 'readonly', 'relativepath', 'modified' },
             { 'lsp_status' },
           },
           right = {
@@ -18,6 +33,8 @@ return {
         },
         component_function = {
           gitbranch = 'FugitiveHead',
+          project_root = 'LightlineProjectRoot',
+          prompt_separator = 'LightlinePromptSeparator',
           lsp_status = 'LspStatus',
         },
         inactive = {

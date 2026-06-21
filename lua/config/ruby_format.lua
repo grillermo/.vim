@@ -4,6 +4,30 @@ local system = function(command, opts)
   return vim.system(command, opts):wait()
 end
 
+local function ruby_manager_executable(name)
+  local home = vim.uv.os_homedir()
+  if not home or home == '' then
+    return nil
+  end
+
+  for _, candidate in ipairs({
+    vim.fs.joinpath(home, '.rbenv', 'shims', name),
+    vim.fs.joinpath(home, '.asdf', 'shims', name),
+    vim.fs.joinpath(home, '.mise', 'shims', name),
+  }) do
+    if vim.fn.executable(candidate) == 1 then
+      return candidate
+    end
+  end
+
+  return nil
+end
+
+local function executable_path(name)
+  local path = ruby_manager_executable(name) or vim.fn.exepath(name)
+  return path ~= '' and path or nil
+end
+
 function M._set_system(fn)
   system = fn or function(command, opts)
     return vim.system(command, opts):wait()
@@ -16,6 +40,10 @@ local function gemfile_includes_rubocop(name, path)
   end
 
   local gemfile = vim.fs.joinpath(path, name)
+  if vim.fn.filereadable(gemfile) == 0 then
+    return false
+  end
+
   local lines = vim.fn.readfile(gemfile)
 
   for _, line in ipairs(lines) do
@@ -41,7 +69,25 @@ function M.format_file(file)
     return false
   end
 
-  local result = system({ 'rubocop', '-A', file }, { cwd = root, text = true })
+  local command
+  local bundle = gemfile_includes_rubocop('Gemfile', root) and executable_path('bundle')
+  if bundle then
+    command = { bundle, 'exec', 'rubocop', '-A', file }
+  else
+    local rubocop = executable_path('rubocop')
+    if not rubocop then
+      vim.notify('Ruby format skipped: rubocop was not found in PATH or Ruby manager shims', vim.log.levels.WARN)
+      return false
+    end
+
+    command = { rubocop, '-A', file }
+  end
+
+  local ok, result = pcall(system, command, { cwd = root, text = true })
+  if not ok then
+    vim.notify(('Ruby format failed to start %s: %s'):format(command[1], result), vim.log.levels.ERROR)
+    return false
+  end
 
   return result.code == 0
 end
