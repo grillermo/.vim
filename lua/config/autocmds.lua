@@ -1,6 +1,8 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
+require('config.sessions').setup()
+
 -- Auto-save on focus lost
 autocmd('FocusLost', {
   command = 'silent! wa!',
