@@ -201,7 +201,7 @@ return {
             '--with-filename',
             '--line-number',
             '--column',
-            '--ignore-case',
+            '--smart-case',
           },
           mappings = {
             i = {
