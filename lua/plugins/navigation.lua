@@ -194,6 +194,10 @@ return {
 
       telescope.setup {
         defaults = {
+          layout_config = {
+            width = 0.92,
+            height = 0.92,
+          },
           vimgrep_arguments = {
             'rg',
             '--color=never',
