@@ -241,6 +241,13 @@ keymap('n', '<C-j>', move_line_down, silent_noremap)
 
 -- Neovide clipboard/save mappings
 if vim.g.neovide then
+  vim.keymap.set('n', '<D-w>', function()
+    if vim.fn.winnr('$') > 1 then
+      vim.cmd('close')
+    else
+      vim.cmd('enew')
+    end
+  end, { desc = 'Close current window' })
   vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
   vim.keymap.set('v', '<D-c>', '"+y') -- Copy
   vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
