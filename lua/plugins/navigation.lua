@@ -17,6 +17,11 @@ return {
         picker:find()
       end
 
+      local function nerdtree_root_and_chdir(picker, item)
+        nerdtree_root(picker, item)
+        vim.api.nvim_set_current_dir(picker:cwd())
+      end
+
       local function nerdtree_confirm(picker, item, action)
         if not item then
           return
@@ -83,6 +88,7 @@ return {
               actions = {
                 confirm = nerdtree_confirm,
                 nerdtree_root = nerdtree_root,
+                nerdtree_root_and_chdir = nerdtree_root_and_chdir,
                 nerdtree_menu = nerdtree_menu,
               },
               win = {
@@ -123,7 +129,7 @@ return {
                       require('snacks.explorer.actions').update(picker, { refresh = true })
                     end,
                     ['m'] = 'nerdtree_menu',
-                    ['C'] = 'nerdtree_root',
+                    ['C'] = 'nerdtree_root_and_chdir',
                     ['I'] = 'toggle_hidden',
                     ['q'] = 'cancel',
                   },
