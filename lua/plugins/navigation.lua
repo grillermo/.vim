@@ -120,6 +120,7 @@ return {
                     ['x'] = 'explorer_close',
                     ['X'] = 'explorer_close_all',
                     ['u'] = 'explorer_up',
+                    ['U'] = 'explorer_up',
                     ['<BS>'] = 'explorer_up',
                     ['i'] = 'edit_split',
                     ['s'] = 'edit_vsplit',
