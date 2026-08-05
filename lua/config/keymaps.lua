@@ -64,10 +64,18 @@ keymap('n', '<leader>l', telescope_current_buffer, silent_noremap)
 keymap('n', '\\', telescope_live_grep_root, silent_noremap) -- live grep from project root
 keymap('n', 'K', telescope_grep_string, silent_noremap) -- grep word under cursor
 
--- snacks file browser
-keymap('n', '<C-n>', function()
-  Snacks.explorer()
-end, silent_noremap)
+-- file browser (nerdtree)
+local function toggle_nerdtree_find()
+  local bufname = vim.t.NERDTreeBufName
+  if bufname and vim.fn.bufwinnr(bufname) ~= -1 then
+    vim.cmd('NERDTreeToggle')
+  elseif vim.fn.expand('%') == '' then
+    vim.cmd('NERDTreeToggle')
+  else
+    vim.cmd('NERDTreeFind')
+  end
+end
+keymap('n', '<C-n>', toggle_nerdtree_find, silent_noremap)
 
 -- Undo tree
 keymap('n', '<leader>g', ':UndotreeToggle<CR>', silent_noremap)

@@ -1,145 +1,45 @@
 return {
-  -- File explorer (snacks)
+  -- File explorer (nerdtree)
   {
-    'folke/snacks.nvim',
-    priority = 1000,
+    'preservim/nerdtree',
     lazy = false,
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-    },
-    opts = function()
-      local function nerdtree_root(picker, item)
-        if not item then
-          return
-        end
-        local root = item.dir and item.file or vim.fs.dirname(item.file)
-        picker:set_cwd(root)
-        picker:find()
-      end
-
-      local function nerdtree_root_and_chdir(picker, item)
-        nerdtree_root(picker, item)
-        vim.api.nvim_set_current_dir(picker:cwd())
-      end
-
-      local function nerdtree_confirm(picker, item, action)
-        if not item then
-          return
-        end
-        if item.dir then
-          if picker.input.filter.meta.searching then
-            picker.input:set('', '')
-            picker:set_cwd(item.file)
-            picker:find()
-          else
-            require('snacks.explorer.tree'):toggle(item.file)
-            picker:find()
-          end
-          return
-        end
-        Snacks.picker.actions.jump(picker, item, action)
-      end
-
-      local function nerdtree_menu(picker)
-        local actions = {
-          { label = 'Add', action = 'explorer_add' },
-          { label = 'Delete', action = 'explorer_del' },
-          { label = 'Rename', action = 'explorer_rename' },
-          { label = 'Copy', action = 'explorer_copy' },
-          { label = 'Move', action = 'explorer_move' },
-          { label = 'Yank', action = 'explorer_yank' },
-          { label = 'Paste', action = 'explorer_paste' },
-          { label = 'Open Externally', action = 'explorer_open' },
-          { label = 'Refresh', action = 'explorer_update' },
-        }
-
-        vim.ui.select(actions, {
-          prompt = 'Explorer action',
-          format_item = function(choice)
-            return choice.label
-          end,
-        }, function(choice)
-          if choice then
-            picker:action(choice.action)
-          end
-        end)
-      end
-
-      return {
-        explorer = {
-          enabled = true,
-          replace_netrw = true,
-        },
-        picker = {
-          enabled = true,
-          sources = {
-            explorer = {
-              cmd = 'rg',
-              follow_file = false,
-              hidden = true,
-              ignored = true,
-              sort = {
-                fields = { 'score:desc', 'dir', '#file', '#text', 'idx' },
-              },
-              layout = {
-                preset = 'sidebar',
-                preview = false,
-              },
-              actions = {
-                confirm = nerdtree_confirm,
-                nerdtree_root = nerdtree_root,
-                nerdtree_root_and_chdir = nerdtree_root_and_chdir,
-                nerdtree_menu = nerdtree_menu,
-              },
-              win = {
-                input = {
-                  keys = {
-                    ['<C-n>'] = 'cancel',
-                  },
-                },
-                list = {
-                  keys = {
-                    ['<CR>'] = 'confirm',
-                    ['<C-n>'] = 'cancel',
-                    ['<Space>'] = 'select_and_next',
-                    ['<S-Space>'] = 'select_and_prev',
-                    ['<Tab>'] = {
-                      function()
-                        vim.api.nvim_feedkeys(
-                          vim.api.nvim_replace_termcodes('<C-w>l', true, false, true),
-                          'n',
-                          false
-                        )
-                      end,
-                      mode = { 'n', 'i' },
-                    },
-                    ['<S-Tab>'] = false,
-                    ['o'] = 'confirm',
-                    ['l'] = 'confirm',
-                    ['h'] = 'explorer_close',
-                    ['x'] = 'explorer_close',
-                    ['X'] = 'explorer_close_all',
-                    ['u'] = 'explorer_up',
-                    ['U'] = 'explorer_up',
-                    ['<BS>'] = 'explorer_up',
-                    ['i'] = 'edit_split',
-                    ['s'] = 'edit_vsplit',
-                    ['t'] = 'tab',
-                    ['r'] = 'explorer_update',
-                    ['R'] = function(picker)
-                      require('snacks.explorer.actions').update(picker, { refresh = true })
-                    end,
-                    ['m'] = 'nerdtree_menu',
-                    ['C'] = 'nerdtree_root_and_chdir',
-                    ['I'] = 'toggle_hidden',
-                    ['q'] = 'cancel',
-                  },
-                },
-              },
-            },
-          },
-        },
+    init = function()
+      vim.g.NERDTreeShowHidden = 1
+      vim.g.NERDTreeQuitOnOpen = 0
+      vim.g.NERDTreeAutoDeleteBuffer = 1
+      vim.g.NERDTreeMinimalUI = 1
+    end,
+    config = function()
+      -- 'C' in snacks changed the explorer root AND cwd together; NERDTree's
+      -- default 'C' only changes the tree root, so replicate the combo here.
+      vim.cmd([[
+        function! NerdtreeRootAndChdir(node) abort
+          call b:NERDTree.changeRoot(a:node)
+          call a:node.path.changeToDir()
+        endfunction
+      ]])
+      vim.fn.NERDTreeAddKeyMap {
+        key = 'C',
+        scope = 'Node',
+        callback = 'NerdtreeRootAndChdir',
+        override = 1,
       }
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'nerdtree',
+        callback = function(args)
+          local buf = args.buf
+          local function alias(lhs, rhs)
+            vim.keymap.set('n', lhs, rhs, { buffer = buf, remap = true, nowait = true })
+          end
+          -- muscle memory from the snacks explorer setup
+          alias('l', 'o') -- open/toggle (snacks: confirm)
+          alias('h', 'x') -- close dir (snacks: explorer_close)
+          alias('<BS>', 'u') -- up a directory (snacks: explorer_up)
+          alias('<C-n>', 'q') -- close the tree (snacks: cancel)
+          vim.keymap.set('n', '<Tab>', '<C-w>l', { buffer = buf, nowait = true })
+        end,
+      })
     end,
   },
 
