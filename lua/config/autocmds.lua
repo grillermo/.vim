@@ -110,3 +110,21 @@ autocmd('BufReadPre', {
     vim.b.javascript_lib_use_underscore = 1
   end,
 })
+
+-- Fold all comment blocks on open
+augroup('FoldComments', { clear = true })
+autocmd('BufWinEnter', {
+  group = 'FoldComments',
+  callback = function(args)
+    if vim.b[args.buf].comments_folded then
+      return
+    end
+    if vim.bo[args.buf].buftype ~= '' then
+      return
+    end
+    vim.b[args.buf].comments_folded = true
+    vim.schedule(function()
+      require('config.fold_comments').fold_comments(args.buf)
+    end)
+  end,
+})
