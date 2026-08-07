@@ -41,6 +41,15 @@ autocmd('BufWritePost', {
   end,
 })
 
+-- Format JS/TS files with Biome when the project root opts in
+autocmd('BufWritePost', {
+  group = augroup('BiomeFormat', { clear = true }),
+  pattern = { '*.js', '*.jsx', '*.ts', '*.tsx' },
+  callback = function(args)
+    require('config.biome_format').format_buffer(args.buf)
+  end,
+})
+
 -- Filetype-specific indentation
 local function set_indent(ft, size)
   autocmd('BufNewFile', {
