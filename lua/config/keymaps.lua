@@ -203,11 +203,6 @@ keymap('n', '<leader>rub', function()
   vim.cmd('!rubocop -A %')
 end, silent_noremap)
 
--- Copy current ruby file
-keymap('n', '<leader>crub', function()
-  vim.cmd('!ruby /Users/grillermo/c/tandem/tandem-scripts/utils/copy_to_clipboard.rb %')
-end, silent_noremap)
-
 -- Cmd+C in normal mode (macOS GUI) -- D-s/D-v/visual D-c handled by neovide block below
 if vim.fn.has('gui_running') == 1 then
   keymap('n', '<D-c>', '<C-c>', noremap)
