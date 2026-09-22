@@ -1,0 +1,4 @@
+# Agent/tool state that lands in the config dir, not part of the config itself.
+# Previously kept out only by ~/.gitignore_global, which does not travel with a clone.
+.claude/
+.ruby-lsp/
