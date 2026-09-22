@@ -101,10 +101,17 @@ return {
 
       telescope.setup {
         defaults = {
+          layout_strategy = 'vertical',
           layout_config = {
             width = 0.92,
             height = 0.92,
+            vertical = {
+              prompt_position = 'top',
+              mirror = true,
+              preview_height = 0.5,
+            },
           },
+          sorting_strategy = 'ascending',
           vimgrep_arguments = {
             'rg',
             '--color=never',
@@ -127,7 +134,16 @@ return {
               ['<C-k>'] = actions.move_selection_previous,
             },
           },
-          file_ignore_patterns = { 'node_modules', '.git', '.ruby-lsp' },
+          -- Lua patterns, not globs: escape dots and anchor to path separators,
+          -- otherwise '.git' matches 'di{git}al' and '.ruby-lsp' matches nothing.
+          file_ignore_patterns = {
+            '^node_modules/',
+            '/node_modules/',
+            '^%.git/',
+            '/%.git/',
+            '^%.ruby%-lsp/',
+            '/%.ruby%-lsp/',
+          },
         },
         pickers = {
           find_files = {
